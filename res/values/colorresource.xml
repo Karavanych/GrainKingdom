@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="interractiveTextColor">#91F7FF</color>
+    <color name="baseTextColor">#FDFD00</color> 
+    <color name="titleTextColor">#66E2FF</color>   
+</resources>
