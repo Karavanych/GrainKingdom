@@ -1,5 +1,7 @@
 package draziw.karavan.grainkingdom.baseclass;
 
+import draziw.karavan.grainkingdom.GameState;
+
 
 public class Land {
 	
@@ -11,15 +13,20 @@ public class Land {
     p ('^Испорчено: ', Land.spoiled, ' акров.');
     p ('^Присоединено: ', Land.bonus, ' акров.');
     p ('^Итого земли: ', Land.now, ' акров.');*/
-    
-	public int total=0;
-	public int corn=0;
-	public int war=0;
-	public int thiefs=0;
-	public int spoiled=0;
-	public int bonus=0;
-	public int now=0;
-	public int currentPrice=22;
+    public static int LAND_MINIMAL=25;
+	
+	public long total=0;
+	public long corn=0;
+	public long war=0;
+	public long thiefs=0;
+	public long spoiled=0;
+	public long bonus=0;
+	public long now=0;
+	
+	public long currentPrice=22;	
+	public long buyMin=0;
+	public long buyMax=0;
+	public long cornToSeedAkr=0;
 	
 	public Land() {
 			
@@ -53,4 +60,7 @@ public class Land {
 		bonus=0;
 		total=now;			
 	}
+	
+	
+		
 }

@@ -30,22 +30,22 @@ public class Corn {
     p ('^Планируемая урожайность: ', Corn.yield, ' бушель/акр.');
     p ('^Итого зерна: ', Corn.now, ' бушелей.');*/
 	
-	public int total=0;
-	public int seed=0;
-	public int harvest=0;
-	public int land=0;
-	public int ships=0;
-	public int food=0;
-	public int war=0;
-	public int thiefs=0;
-	public int rats=0;
-	public int fee=0;
-	public int science=0;
-	public int spoiled=0;
-	public int bonus=0;
-	public int deal=0;
-	public int yield=0;
-	public int now=0;
+	public long total=0;
+	public long seed=0;
+	public long harvest=0;
+	public long land=0;
+	public long ships=0;
+	public long food=0;
+	public long war=0;
+	public long thiefs=0;
+	public long rats=0;
+	public long fee=0;
+	public long science=0;
+	public long spoiled=0;
+	public long bonus=0;
+	public long deal=0;
+	public long yield=0;
+	public long now=0;
 	
 	public Corn() {
 

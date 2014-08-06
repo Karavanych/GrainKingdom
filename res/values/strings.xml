@@ -2,41 +2,27 @@
 <resources>
 
     <string name="app_name">The Grain Kingdom</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Settings</string>   
        
-<string name="populationreports">
-       \nНаселение на начало года: %1$d человек.
-       \nРодилось: %2$d человек.
-       \nУмерло от голода: %3$d человек.
-       \nУмерло от болезней: %4$d человек.
-       \nПогибло в боях: %5$d человек.
-       \nСамоубийц: %6$d человек.
-       \nВ результате воровства: %7$d человек.
-       \nВ порту: %8$d человек.
-       \nВ плавании: %9$d человек.
-       \nМиграции: %10$d человек.
-       \nИтого население: %11$d человек.</string>
-           
-
-<string name="cornreports">    
-    \nЗерно на начало года: %1$d бушелей.
-    \nПошло на семена: %2$d бушелей.
-    \nУрожай: %3$d бушелей.
-    \nВыручено при продаже земли: %4$d бушелей.
-    \nУплачено при покупке земли: %5$d бушелей.
-    \nНа постройку кораблей: %6$d бушелей.
-    \nПошло на еду: %7$d бушелей.
-    \nВ результате войны: %8$d бушелей.
-    \nВ результате воровства: %9$d бушелей.
-    \nСъедено крысами: %10$d бушелей.
-    \nВ уплату наёмникам: %11$d бушелей.
-    \nВ уплату учёным: %12$d бушелей.
-    \nИспорчено: %13$d бушелей.
-    \nПриобретено: %14$d бушелей.
-    \nРасход/прибыль со сделки: %15$d бушелей.
-    \nПланируемая урожайность: %16$d бушель/акр.
-    \nИтого зерна: %17$d бушелей.
-</string>
-
-
+    <string name="buyLand">Вы купили %1$d акров земли за %2$d бушелей зерна.</string>
+    <string name="buyLandHunger">Оставшегося зерна не хватит чтобы прокормить всех людей.\nЛюди умирают с голода.</string>
+	<string name="sellLand">Вы продали %1$d акров земли за %2$d бушулей зерна.</string>
+	<string name="sellLandDeficit">Народ недоволен! Слишком высокая плотность населения для такого малого количества земли!</string>
+	<string name="sellLandMinimal">А где вашим людям жить ?</string>
+	<string name="sellLandTooMuch">Распродать такое большое количество земли удалось только по %1$d бушелей за акр</string>
+	<string name="peopleEat">На пропитание ушло %1$d бушелей зерна.</string>
+	<string name="peopleEatMinimal">А может быть всё-таки накормим народ?</string>
+	<string name="peopleEatHunger">Умерло от голода %1$d человек.</string>
+	<string name="sowNoCorn">Не хватает зерна для посева!</string>
+	<string name="sowNoLand">Не хватает земли для посева!</string>
+	<string name="sowNoPeople">Не хватает рабочей силы для посева!</string>
+	<string name="sowText">Засеяли %1$d акров земли.\nНа посев ушло %2$d бушелей зерна.</string>
+	<string name="scienceText">На исследования потрачено %1$d бушелей зерна.\n Ученые приступили к работе.</string>
+	<string name="noCorn">У Вас нет столько зерна!</string>
+	<string name="shipsBuild">Построили кораблей: %1$d</string>
+	<string name="noPeople">У Вас нет столько людей!</string>
+	<string name="noMilitaryPeople">У Вас нет столько боеспособных людей!</string>
+	<string name="portNoShipForMilitary">Не хватает кораблей для всех воинов!</string>
+	<string name="portPeopleShips">Отправили в плавание %1$d человек.\nКораблей ушло в плавание - %2$d.</string>
+	
 </resources>

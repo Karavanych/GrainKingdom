@@ -1,6 +1,8 @@
 package draziw.karavan.grainkingdom.supportclass;
 
 import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
 public class mySpannableString extends SpannableString{
@@ -30,4 +32,24 @@ public class mySpannableString extends SpannableString{
 		this.setSpan(what, charcount+start, theend, flags);			
 	}
 
+	//tag open [color=FFCEBF] , close= [/color]
+	public static SpannableString setColorByTags(SpannableString tekSpannedStr) {
+		String[] splitedtextarray = tekSpannedStr.toString().split("[color=");
+		int comulativeLength=0;
+		ForegroundColorSpan[] tekSpan=null;
+		for (String tek: splitedtextarray) {
+			comulativeLength+=tek.length();
+			int closeIdx = tek.indexOf("]");
+			tekSpan = tekSpannedStr.getSpans(comulativeLength, comulativeLength+closeIdx,ForegroundColorSpan.class);
+			
+		}
+				
+		
+		if (tekSpan!=null) {
+			tekSpannedStr.removeSpan(tekSpan);
+		}
+		
+		return tekSpannedStr;				
+	}
+	
 }

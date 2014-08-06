@@ -14,12 +14,14 @@ public class Ships {
 	public boolean isPort=false;
 	public boolean isPortShow=false;
 	
-	public int total=0;
-	public int build=0;
-	public int war=0;
-	public int sail=0;
-	public int port=0;
-	public int now=0;
+	public long shipPrice=0;
+	
+	public long total=0;
+	public long build=0;
+	public long war=0;
+	public long sail=0;
+	public long port=0;
+	public long now=0;
 	
 	public Ships() {
 		// TODO Auto-generated constructor stub

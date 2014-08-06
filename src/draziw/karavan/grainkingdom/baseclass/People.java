@@ -18,17 +18,24 @@ public class People {
     \nМиграции: People.balance человек.
     \nИтого население: People.now человек.</string>*/
 	
-	public int total=0;
-	public int born=0;
-	public int hunger=0;
-	public int illness=0;
-	public int war=0;
-	public int suicide=0;
-	public int thiefs=0;
-	public int port=0;
-	public int sail=0;
-	public int balance=0;
-	public int now=0;
+	public static int ONE_MAN_EAT=40;
+	public static int ONE_MAN_LAND=5;
+	
+	public long maxMilitary=0;
+	public long maxShipLoad=0;
+	
+	public long total=0;
+	public long born=0;
+	public long hunger=0;
+	public long illness=0;
+	public long war=0;
+	public long suicide=0;
+	public long thiefs=0;
+	public long port=0;
+	public long sail=0;
+	public long balance=0;
+	public long now=0;
+	
 		
 	
 	public People() {
@@ -113,12 +120,13 @@ public class People {
 		total=now;			
 	}
 	
-	public int cornNeeded() {
-		return now*40;
+	
+	public long cornNeeded() {
+		return now*ONE_MAN_EAT;
 	}
 	
-	public int landNeeded() {
-		return now*5;
+	public long landNeeded() {
+		return now*ONE_MAN_LAND;
 	}
 	
 }

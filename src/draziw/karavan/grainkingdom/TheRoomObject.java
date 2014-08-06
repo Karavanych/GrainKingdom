@@ -1,6 +1,9 @@
 package draziw.karavan.grainkingdom;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import android.content.Context;
 import android.text.Html;
@@ -9,21 +12,21 @@ import android.util.Log;
 
 public class TheRoomObject {
 	
-	//возможные действия
-	public static String ACTION_NEXT="NEXT";
-	public static String ACTION_NEW_YEAR="NEWYEAR";
-	public static String ACTION_SVERNUT="SVERNUT";
-	public static String ACTION_BUYLAND="BUYLAND";
+	public static int TYPE_MULTYTEXT=777;
+	
+	public static String ATTRIBUTE_NAME_TEXT="T1";
+	public static String ATTRIBUTE_ID_IMAGE="I1";
+	public static String ATTRIBUTE_NAME_FUNCTION="F1";
 	
 	private boolean initialized=false;
 	private int id;
 	private String textMain;
 	private String imageString;
-	private String layoutString;
+	private String layoutString;	
+	
 	private ArrayList<ActionFromXml> actionArray;
 	private ArrayList<SeekBarFromXml> seekBarArray;
-	private int varcount=0;// в тексте комнаты, количество переменных
-	
+	private ArrayList<Map<String, Object>> data;
 	
 	public int getId() {
 		return id;
@@ -34,10 +37,41 @@ public class TheRoomObject {
 	}
 	
 	public TheRoomObject() {
-		// TODO Auto-generated constructor stub
 		actionArray=new ArrayList<ActionFromXml>();		
 		seekBarArray=new ArrayList<SeekBarFromXml>(); 
 	}
+	
+	public TheRoomObject(boolean multiText) {
+		this();
+		if (multiText) {data = new ArrayList<Map<String, Object>>();}		
+	}
+	
+	public void addMultiText(String txt,String function,String img){
+		  int imageId=getImageId(img,GameState.context);
+		  Map<String, Object> m = new HashMap<String,Object>();
+	      m.put(ATTRIBUTE_NAME_TEXT, txt);
+	      m.put(ATTRIBUTE_NAME_FUNCTION, function);
+	      m.put(ATTRIBUTE_ID_IMAGE, imageId);
+	      data.add(m);
+	}
+	
+	
+	public void multiTextRefactoring() {
+		//for (Map<String, Object> tekMap : data){
+		for (Iterator<Map<String, Object>> iterator = data.iterator(); iterator.hasNext(); ){
+			Map<String, Object> tekMap = iterator.next();
+			String tekFunctionStr=(String) tekMap.get(ATTRIBUTE_NAME_FUNCTION);
+			String tekTxt=(String) tekMap.get(ATTRIBUTE_NAME_TEXT);
+			Spanned tekSpn=ReflectTextFunction.startAction(tekFunctionStr,tekTxt);
+			if (tekSpn!=null) {
+				tekMap.put(ATTRIBUTE_NAME_TEXT,tekSpn);
+			} else { // вернулся ответ что этого события нет, надо удалять
+				iterator.remove();
+			}
+		}
+		
+	}
+	
 	
 	public void setId(String ss) {
 		id=Integer.parseInt(ss);
@@ -47,17 +81,13 @@ public class TheRoomObject {
 	public void setLayout(String ss) {
 		layoutString=ss;		
 	}
-	
+		
 	public void setTextMain(String ss) {
 		textMain=ss;
 	}
 	
 	public void setImage(String ss) {
 		imageString=ss;
-	}
-	
-	public void setVarCount(String ss) {
-		varcount=Integer.parseInt(ss);
 	}
 	
 	public boolean isInitialized() {
@@ -77,16 +107,19 @@ public class TheRoomObject {
 	}
 	
 	public int getImageId(Context cc) {
+		return getImageId(imageString,cc);		
+	}
+	
+	public int getImageId(String tekStr,Context cc) {
 		int resID=-1;
-		if (null==imageString) return resID;
+		if (null==tekStr) return resID;
 		
-			resID = cc.getResources().getIdentifier(imageString, "drawable", cc.getPackageName());			
+			resID = cc.getResources().getIdentifier(tekStr, "drawable", cc.getPackageName());			
 		
 		return resID;
 	}
 
-	public Spanned getText(Context cc) {
-		// TODO Auto-generated method stub		
+	public Spanned getText(Context cc) {		
 		return Html.fromHtml(textMain);
 	}
 	
@@ -118,12 +151,26 @@ public class TheRoomObject {
 		case 10://Gamestate.selllandOperation
 			textMain=GameState.sellLandOperation(textMain);
 			break;			
+		case 11://Gamestate.eatOperation
+			textMain=GameState.eatOperation(textMain);
+			break;	
+		case 12:// Gamestate.sowOperation			
+			textMain=GameState.sowOperation(textMain);			
+			break;
+		case 13:// GameState.scienceOperation
+			textMain=GameState.scienceOperation(textMain);
+			break;
+		case 14:// GameState.shipBuildOperation
+			textMain=GameState.shipBuildOperation(textMain);
+			break;
+		case 15://GameState.portOperation
+			textMain=GameState.portOperation(textMain);
+			break;
 		default:
 			return;
 		}
-		
-		textMain=RoomFromXML.TextClearIfdelTag(textMain);
-		
+				
+		textMain=RoomFromXML.TextClearIfdelTag(textMain);			
 	}
 
 	public static void onExit() {		
@@ -134,18 +181,39 @@ public class TheRoomObject {
 	// START for SeekBar
 			public class SeekBarFromXml {
 				public String id;
+				public String text;
+				public String buttonAction;
 				
-				public SeekBarFromXml(String mId) {
+				public SeekBarFromXml(String mId,String mButtonAction) {
 					id=mId;
+					buttonAction=mButtonAction;
+				}
+				
+				public void setText(String mText) {
+					text=mText;			
 				}
 			}
 			
-			public void addSeekBar(String mId) {
-				seekBarArray.add(new SeekBarFromXml(mId));		
+			public void addSeekBar(String mId,String mButtonAction) {
+				seekBarArray.add(new SeekBarFromXml(mId,mButtonAction));		
 			}
 			
 			public int getSeekBarCount() {
 				return seekBarArray.size();
+			}
+			
+			public void setLastSeekBarText(String mText) {
+				  if (seekBarArray.size()>0) {
+					  seekBarArray.get(seekBarArray.size()-1).setText(mText);
+				  }	
+			}
+			
+			public Spanned getSeekBarText(int idx) {						
+				return Html.fromHtml(seekBarArray.get(idx).text);				
+			}
+			
+			public String getSeekBarAction(int idx) {
+				return seekBarArray.get(idx).buttonAction;
 			}
 			
 	// END For SeekBar
@@ -155,14 +223,14 @@ public class TheRoomObject {
 				public String text;
 				public String id;
 				public String roomId;
-				public String type;		
+				public String buttonAction;		
 				
 				public ActionFromXml(String mText,String mId,String mRoomId,String mType) {
 					// 
 					text=mText;
 					id=mId;
 					roomId=mRoomId;
-					type=mType;
+					buttonAction=mType;
 				}
 				
 				public void setText(String mText) {
@@ -189,15 +257,24 @@ public class TheRoomObject {
 				return Html.fromHtml(actionArray.get(idx).text);				
 			}
 			
-			public String getActionType(int idx) {
-				return actionArray.get(idx).type;			
+			public String getAction(int idx) {				
+				return actionArray.get(idx).buttonAction;			
 			}
 			
 			public boolean isAction(int idx,String sType) {
-				return getActionType(idx).equals(sType);	
+				return getAction(idx).equals(sType);	
 			}
+
 			
 	// End for Action
-
+			
+	public int getType() {
+		if (data!=null && !data.isEmpty()) return TYPE_MULTYTEXT;
+		else return 0;		
+	}
+			
+	public ArrayList<Map<String, Object>> getMultiTextData() {
+		return data;
+	}
 }
 

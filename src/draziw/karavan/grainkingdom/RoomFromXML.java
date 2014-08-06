@@ -3,25 +3,22 @@ package draziw.karavan.grainkingdom;
 import org.xmlpull.v1.XmlPullParser;
 
 
-
-
-
-import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 public class RoomFromXML {
 	public static int tekroom;
 
-	public static TheRoomObject create(int roomnumber,Activity cc) {
+	public static TheRoomObject create(int roomnumber,Context cc) {
 		tekroom=roomnumber;
 		
 		return createRoomFromXML(tekroom,cc);
 				    
 	}
 	
-	public static TheRoomObject createRoomFromXML(int roomnumber,Activity cc) {
+	public static TheRoomObject createRoomFromXML(int roomnumber,Context cc) {
 		//parse xml
-		TheRoomObject theRoom=new TheRoomObject();
+		TheRoomObject theRoom=null;
 		try {
 		      XmlPullParser xpp = cc.getResources().getXml(R.xml.roomstruct);
 		      //цикл по всему xml
@@ -29,15 +26,18 @@ public class RoomFromXML {
 		    	  if (xpp.getEventType() == XmlPullParser.START_TAG && xpp.getName().equals("room")) {
 		    		  String tekRoomId = xpp.getAttributeValue(null, "id");		    		  
 		    		  
+		    		  
 		    		  if (tekRoomId.equals(Integer.toString(roomnumber))) {
-		    			  theRoom.setId(tekRoomId);
+		    			  String layoutString=xpp.getAttributeValue(null, "layout");
+		    			  boolean roomMultitext="multitext".equals(layoutString);
 		    			  
-		    			  //определяем какой layout должен быть у комнаты
-		    			  theRoom.setLayout(xpp.getAttributeValue(null, "layout"));		    			 
+		    			  theRoom=new TheRoomObject(roomMultitext);
 		    			  
-		    			  //String textMain="";
-		    			  //String imageString="";
-		    			  //ArrayList<ActionFromXml> actionArray=new ArrayList<ActionFromXml>();
+		    			  theRoom.setId(tekRoomId);		    			  
+		    			  		    			  
+		    			  theRoom.setLayout(layoutString);
+		    			  
+		    			  		    			 
 		    			  
 		    			  //цикл по тегам внутри room
 		    			  String tekTag = xpp.getName();		    			  
@@ -51,19 +51,34 @@ public class RoomFromXML {
 		    					  
 		    					  if ("action".equals(tekTag)) {
 		    						  String aId = xpp.getAttributeValue(null,"id");
-			    					  String aType = xpp.getAttributeValue(null,"type");
-			    					  theRoom.addAction("", aId, tekRoomId, aType);		    						  
+			    					  String mButtonAction = xpp.getAttributeValue(null,"buttonAction");
+			    					  theRoom.addAction("", aId, tekRoomId, mButtonAction);		    						  
 		    					  }
 		    					  
 		    					  if ("seekbar".equals(tekTag)) {
 		    						  String aId = xpp.getAttributeValue(null,"id");
-		    						  theRoom.addSeekBar(aId);			    						 
-		    					  }		    					  		    					  
+		    						  String mButtonAction=xpp.getAttributeValue(null,"buttonAction");
+		    						  theRoom.addSeekBar(aId,mButtonAction);			    						 
+		    					  }	
+		    					  if ("text".equals(tekTag)) {
+		    						  if (roomMultitext) {
+			    					  
+			    						  String functionString = xpp.getAttributeValue(null,"function");
+			    						  String imageString=xpp.getAttributeValue(null,"image");
+			    						  
+			    						  xpp.next();// делаем следующий шаг и получаем тело текста
+			    						  String textString=xpp.getText();			    						  
+			    						  theRoom.addMultiText(textString, functionString, imageString);
+			    					  } else {
+			    						  
+			    					  }
+		    					  }
 		    				  }
 		    				  		    				  
 		    				  //текст внутри тегов
 		    				  if (xpp.getEventType() == XmlPullParser.TEXT) {
 		    					  if ("text".equals(tekTag)) {
+		    						  
 		    						  theRoom.setTextMain(xpp.getText());		    						  
 		    					  }		
 		    					  if ("image".equals(tekTag)) {
@@ -73,6 +88,10 @@ public class RoomFromXML {
 		    					  if ("action".equals(tekTag)) { // заполняем текст последнего в списке
 		    						  theRoom.setLastActionText(xpp.getText());
 		    					  }
+		    					  
+		    					  if ("seekbar".equals(tekTag)) {
+		    						  theRoom.setLastSeekBarText(xpp.getText());			    						 
+		    					  }	
 		    				  }
 		    				  xpp.next();
 		    			  }
