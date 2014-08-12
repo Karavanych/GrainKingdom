@@ -24,5 +24,11 @@
 	<string name="noMilitaryPeople">У Вас нет столько боеспособных людей!</string>
 	<string name="portNoShipForMilitary">Не хватает кораблей для всех воинов!</string>
 	<string name="portPeopleShips">Отправили в плавание %1$d человек.\nКораблей ушло в плавание - %2$d.</string>
+	<string name="asYouWish">Как хотите.</string>
+	<string name="breakDeal">Торговцы не хотят иметь с Вами дело. Вы невнимательно прочитали условия сделки.</string>
+	<string name="dealConcluded">Вы передали торговцам %1$d бушулей зерна, ударили по рукам и торговцы удалились.</string>
+	<string name="payTribute">Вы удовлетворили требования противника. Еще один год под тяжким гнетом иноземцев.</string>
+	<string name="notPayIgo">Ваши войска подняты по тревоге и приведены в полную боевую готовность.</string>
 	
 </resources>
+

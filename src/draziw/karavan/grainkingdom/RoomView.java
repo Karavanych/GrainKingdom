@@ -41,7 +41,8 @@ public class RoomView {
 			TheTekRoom.multiTextRefactoring();
 			setMultiText(cc,TheTekRoom);
 		} else {
-			TheTekRoom.textRefactoring();
+			TheTekRoom.multiTextRefactoring();
+			if ((TheTekRoom.getText(cc)==null) && !GameState.TEST) {nextRoom();}
 			settext(cc,TheTekRoom);
 		}
 		addseekbar(cc,TheTekRoom);

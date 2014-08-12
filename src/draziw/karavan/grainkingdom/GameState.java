@@ -2,6 +2,7 @@ package draziw.karavan.grainkingdom;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Stack;
 
 import android.content.Context;
 import draziw.karavan.grainkingdom.baseclass.Corn;
@@ -28,6 +29,7 @@ public class GameState {
 	public static boolean isSow=false;
 	public static long DEAL=0;
 	public static long DealMoney=0;
+	public static boolean IGO=false;
     
     static People people;
     static Land land;
@@ -41,6 +43,9 @@ public class GameState {
     public static Random MY_RANDOM=new Random();
     
     public static HashMap<String, Number> interfaceParams = new HashMap<String, Number>(); // испльзуется для параметров seekbar например
+    public static Stack<Long> stackVar=new Stack<Long>();
+
+	
 
 	
 
@@ -450,10 +455,16 @@ public class GameState {
 	}
 
 
-	private static void dontShowSeekBar() {	
+	public static void dontShowSeekBar() {	
 		interfaceParams.put(MyCustomSeekBar.SEEK_BAR_MIN_VALUE_KEY, 0l);
         interfaceParams.put(MyCustomSeekBar.SEEK_BAR_MAX_VALUE_KEY,0l);
         interfaceParams.put(MyCustomSeekBar.SEEK_BAR_STEP_KEY, 0l);			
 	}
 
+	public static void setSeekBarParams(long min,long max,long step) {
+		 // подготовим параметры для SeekBar
+        interfaceParams.put(MyCustomSeekBar.SEEK_BAR_MIN_VALUE_KEY, min);
+        interfaceParams.put(MyCustomSeekBar.SEEK_BAR_MAX_VALUE_KEY,max);
+        interfaceParams.put(MyCustomSeekBar.SEEK_BAR_STEP_KEY, step);	
+	}
 }

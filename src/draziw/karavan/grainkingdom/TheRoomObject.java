@@ -20,7 +20,6 @@ public class TheRoomObject {
 	
 	private boolean initialized=false;
 	private int id;
-	private String textMain;
 	private String imageString;
 	private String layoutString;	
 	
@@ -39,12 +38,13 @@ public class TheRoomObject {
 	public TheRoomObject() {
 		actionArray=new ArrayList<ActionFromXml>();		
 		seekBarArray=new ArrayList<SeekBarFromXml>(); 
+		data = new ArrayList<Map<String, Object>>();
 	}
 	
-	public TheRoomObject(boolean multiText) {
+/*	public TheRoomObject(boolean multiText) {
 		this();
 		if (multiText) {data = new ArrayList<Map<String, Object>>();}		
-	}
+	}*/
 	
 	public void addMultiText(String txt,String function,String img){
 		  int imageId=getImageId(img,GameState.context);
@@ -66,7 +66,7 @@ public class TheRoomObject {
 			if (tekSpn!=null) {
 				tekMap.put(ATTRIBUTE_NAME_TEXT,tekSpn);
 			} else { // вернулся ответ что этого события нет, надо удалять
-				iterator.remove();
+				iterator.remove();		
 			}
 		}
 		
@@ -82,9 +82,9 @@ public class TheRoomObject {
 		layoutString=ss;		
 	}
 		
-	public void setTextMain(String ss) {
+/*	public void setTextMain(String ss) {
 		textMain=ss;
-	}
+	}*/
 	
 	public void setImage(String ss) {
 		imageString=ss;
@@ -120,12 +120,14 @@ public class TheRoomObject {
 	}
 
 	public Spanned getText(Context cc) {		
-		return Html.fromHtml(textMain);
+		//return Html.fromHtml(textMain);
+		if (data.size()==0) return null;
+		return (Spanned) data.get(0).get(ATTRIBUTE_NAME_TEXT);
 	}
 	
 
 	
-	public void textRefactoring() {		
+	/*public void textRefactoring(String textMain) {		
 		switch(id) {
 		case 3: //People.reports
 			textMain=GameState.people.fillReportVars(textMain);
@@ -171,7 +173,7 @@ public class TheRoomObject {
 		}
 				
 		textMain=RoomFromXML.TextClearIfdelTag(textMain);			
-	}
+	}*/
 
 	public static void onExit() {		
 		
@@ -264,17 +266,28 @@ public class TheRoomObject {
 			public boolean isAction(int idx,String sType) {
 				return getAction(idx).equals(sType);	
 			}
+			
+			public void removeAction(int i) {				
+				for ( Iterator<ActionFromXml> iterator = actionArray.iterator(); iterator.hasNext(); ){
+					 ActionFromXml tekAction = iterator.next();
+					 if (tekAction.id.equals(Integer.toString(i))) {
+						 iterator.remove();
+					 }				
+				}
+			}			
 
 			
 	// End for Action
 			
 	public int getType() {
-		if (data!=null && !data.isEmpty()) return TYPE_MULTYTEXT;
+		if (data!=null && data.size()>1) return TYPE_MULTYTEXT;
 		else return 0;		
 	}
 			
 	public ArrayList<Map<String, Object>> getMultiTextData() {
 		return data;
 	}
+
+
 }
 

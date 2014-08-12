@@ -22,7 +22,7 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		
 		
 		GameState.initialization(this);
-		RoomView.create(1, this);
+		RoomView.create(18, this);
 		
 	}
 

@@ -27,6 +27,9 @@ public class Statistics {
 	public long radiationOff=0;
 	public long plagueOff=0;
 	public long dealNumber=0;
+	public long igoPeople=0;
+	public long igoGrain=0;
+	public long igoLand=0;
 	
 	public void starvedToDeath(long std) {
 		starvedToDeath+=std;		
@@ -120,6 +123,16 @@ public class Statistics {
 	public void dealNumber(int i) {
 		dealNumber+=i;
 		
+	}
+	public void igoPeople(long people) {
+		igoPeople+=people;		
+	}
+	public void igoGrain(long grain) {
+		igoGrain+=grain;
+		
+	}
+	public void igoLand(long land) {
+		igoLand+=land;		
 	}
 
 }

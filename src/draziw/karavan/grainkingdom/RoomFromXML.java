@@ -31,7 +31,7 @@ public class RoomFromXML {
 		    			  String layoutString=xpp.getAttributeValue(null, "layout");
 		    			  boolean roomMultitext="multitext".equals(layoutString);
 		    			  
-		    			  theRoom=new TheRoomObject(roomMultitext);
+		    			  theRoom=new TheRoomObject();
 		    			  
 		    			  theRoom.setId(tekRoomId);		    			  
 		    			  		    			  
@@ -60,27 +60,24 @@ public class RoomFromXML {
 		    						  String mButtonAction=xpp.getAttributeValue(null,"buttonAction");
 		    						  theRoom.addSeekBar(aId,mButtonAction);			    						 
 		    					  }	
-		    					  if ("text".equals(tekTag)) {
-		    						  if (roomMultitext) {
-			    					  
+		    					  if ("text".equals(tekTag)) {		    									    					  
 			    						  String functionString = xpp.getAttributeValue(null,"function");
-			    						  String imageString=xpp.getAttributeValue(null,"image");
-			    						  
+			    						  String imageString="";
+			    						  if (roomMultitext) {
+			    							  xpp.getAttributeValue(null,"image");
+			    						  }			    						  
 			    						  xpp.next();// делаем следующий шаг и получаем тело текста
 			    						  String textString=xpp.getText();			    						  
-			    						  theRoom.addMultiText(textString, functionString, imageString);
-			    					  } else {
-			    						  
-			    					  }
+			    						  theRoom.addMultiText(textString, functionString, imageString);			    					
 		    					  }
 		    				  }
 		    				  		    				  
 		    				  //текст внутри тегов
 		    				  if (xpp.getEventType() == XmlPullParser.TEXT) {
-		    					  if ("text".equals(tekTag)) {
+		    					  /*	  if ("text".equals(tekTag)) {
 		    						  
 		    						  theRoom.setTextMain(xpp.getText());		    						  
-		    					  }		
+		    					  }	*/	
 		    					  if ("image".equals(tekTag)) {
 		    						  theRoom.setImage(xpp.getText());
 		    					  }

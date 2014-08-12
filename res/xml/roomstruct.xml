@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- action type nextRoom - переход в следующую комнату -->
-<!-- внутри тега <!CDATA[ Можно использовать Html-теги<br>,<p> и прочие..., это работает внутри <text function="default"> и <action>  ]]> -->
+<!-- внутри тега <!CDATA[ Можно использовать Html-теги<br>,<p> и прочие..., это работает внутри <text function="defaultRefactoring"> и <action>  ]]> -->
 <rooms>
 	<room id="1" layout="room1" name="main">  
 		<image>title</image> <!-- R.drawable.title -->
-		<text function="default"><![CDATA[<p> Данная игра является одной из самых первых экономичесих компьютерных игр. Первая версия игры называлась «The Sumer Game».</p>
+		<text function="room1started"><![CDATA[<p> Данная игра является одной из самых первых экономичесих компьютерных игр. Первая версия игры называлась «The Sumer Game».</p>
 	Её написал Дуг Даймент в 1968 году на языке FOCAL на DEC PDP-8. В последствии, Дэвид Х. Ал расширил возможности игры, реализовав её на языке BASIC. Он назвал игру «Hammurabi».
 	Исходный код игры он опубликовал в издании «BASIC Computer Games». В дальнейшем игра переживала ещё несколько реинкарнаций. Одной из них была игра «Kingdom of Grain»
 	для ZX Spectrum (1992 год).В 2005-2008 годах Парфёнов Алексей (alkatrazstudio@yandex.ru), основываясь на коде игры «Hammurabi», написал игру «Kingdom 3» на языке Pascal,
@@ -17,7 +17,7 @@
 	</room>
 	<room id="2" layout="room1" name="greetings">
 		<image>main</image><!-- R.drawable.main --> 
-		<text function="default"><![CDATA[<p>Добро пожаловать в Королевство Зерна!</p>
+		<text function="room2started"><![CDATA[<p>Добро пожаловать в Королевство Зерна!</p>
 			
 			  <p> На пышной церемонии коронации Вам поручено было произнести клятву:<br>
 			«Я, нижеподписавшийся Король обязуюсь выполнять следующие обязательства:<br>
@@ -33,7 +33,7 @@
 	</room>
 	<room id="3" layout="room1" name="PeopleReport">
 		<image>main</image>
-		<text function="default"><![CDATA[ <font color='red'>Население</font> на начало года: %1$d человек.<br>
+		<text function="room3started"><![CDATA[ <font color='red'>Население</font> на начало года: %1$d человек.<br>
        Родилось: %2$d человек.<br>
        Умерло от голода: %3$d человек.<br>
        Умерло от болезней: %4$d человек.<br>
@@ -48,7 +48,7 @@
 	</room>
 	<room id="4" layout="room1" name="LandReport">
 		<image>main</image>
-		<text function="default"><![CDATA[ 		
+		<text function="room4started"><![CDATA[ 		
     Земля на начало года: %1$d акров.<br>
     Куплено/продано: %2$d акров.<br>
     В результате войны: %3$d акров.<br>
@@ -61,7 +61,7 @@
 	</room>		
 	<room id="5" layout="room1" name="CornReport">
 		<image>corn</image>
-		<text function="default"><![CDATA[ 
+		<text function="room5started"><![CDATA[ 
 		Зерно на начало года: %1$d бушелей.<br>
 		Пошло на семена: %2$d бушелей.<br>
 		Урожай: %3$d бушелей.<br>
@@ -84,7 +84,7 @@
 	</room>		
 	<room id="6" layout="room1" name="ShipsReport">
 		<image>port</image>
-		<text function="default"><![CDATA[ 		
+		<text function="room6started"><![CDATA[ 		
         Корабли: %1$d кораблей.<br>
         Построено: %2$d кораблей.<br>
         В результате войны: %3$d кораблей.<br>
@@ -96,7 +96,7 @@
 	</room>	
 	<room id="7" layout="room1" name="ScienceReport">
 		<image>labour</image>
-		<text function="default"><![CDATA[ 		
+		<text function="room7started"><![CDATA[ 		
         <p>Исследования:</p>
         Население: %1$d уровень.<br>
         Земля: %2$d уровень.<br>
@@ -111,7 +111,7 @@
 	</room>	
 	<room id="8" layout="room1" name="otherReport">
 		<image>main</image>
-		<text function="default"><![CDATA[ 		
+		<text function="room8started"><![CDATA[ 		
         <p>Внешняя/внутренняя политика:</p>
         Рейтинг государства: %1$d пунктов.<br>
         Гнёт: %2$d<br>
@@ -121,7 +121,7 @@
 	</room>	
 	<room id="9" layout="room1" name="buyLand">
 		<image>dry_land</image>
-		<text function="default"><![CDATA[ 		
+		<text function="room9started"><![CDATA[ 		
         <p>Год %1$d.</p> <p>Покупка земли.</p>
         Стоимость одного акра земли: %2$d <br>               
         <p>На данный момент у Вас: </p>
@@ -141,7 +141,7 @@
 	
 	<room id="10" layout="room1" name="sellLand">
 		<image>city_corn</image>
-		<text function="default"><![CDATA[ 		
+		<text function="room10started"><![CDATA[ 		
         <p>Год %1$d.</p> <p>Продажа земли.</p>
         Стоимость одного акра земли: %2$d <br>               
         <p>На данный момент у Вас: </p>
@@ -158,7 +158,7 @@
 	
 	<room id="11" layout="room1" name="eat">
 		<image>lazy_people</image>
-		<text function="default"><![CDATA[ 		
+		<text function="room11started"><![CDATA[ 		
         <p>Год %1$d.</p> <p>Питание.</p>
         Сколько бушелей зерна Вы позволите людям употребить в пищу?<br>
         <p>На данный момент у вас:<p>
@@ -173,7 +173,7 @@
 		
 	<room id="12" layout="room1" name="sow">
 	    <image>labour</image>
-		<text function="default"><![CDATA[ 		
+		<text function="room12started"><![CDATA[ 		
         <p>Год %1$d.</p> <p>Посев.</p>
         [ifdel1]
         Сколько акров земли Вы желаете засеять?<br>
@@ -192,7 +192,7 @@
 	
 	<room id="13" layout="room1" name="science">
 	    <image>academy</image>
-	    <text function="default"><![CDATA[ 		
+	    <text function="room13started"><![CDATA[ 		
         <p>Год %1$d.</p> <p>Исследования.</p>
         [ifdel1]Академия закрыта - все уже изучено![/ifdel1]
         [ifdel2]Сколько бушелей зерна Вы потратите на исследования?<br>
@@ -207,7 +207,7 @@
 	</room>		
 	<room id="14" layout="room1" name="shipBuild">
 	    <image>port</image>
-	    <text function="default"><![CDATA[ 	
+	    <text function="room14started"><![CDATA[ 	
 	    <p>Год %1$d.</p> <p>Строительство кораблей.</p>	
      	Сколько кораблей Вы построите?<br>
         <p>На данный момент у Вас:</p>
@@ -224,7 +224,7 @@
 	</room>	
 	<room id="15" layout="room1" name="Port">
 	    <image>port</image>
-	    <text function="default"><![CDATA[<p>Год %1$d.</p> <p>Отправление кораблей.</p>
+	    <text function="room15started"><![CDATA[<p>Год %1$d.</p> <p>Отправление кораблей.</p>
  		[ifdel1]Сколько человек Вы отправите в плавание?<br>
         <p>На данный момент у Вас:</p>
         Кораблей: ', Ships.now, ' штук.<br>
@@ -380,20 +380,47 @@
 	    ]]></text>		        	      	    	    	    	    	    		    	    		    	    		    	    		    	    	
 	    <action id="1" buttonAction="nextRoom"><![CDATA[  Далее]]></action>
 	</room>
-		<room id="17" layout="room1" name="ShowNewsDeal">
+	<room id="17" layout="room1" name="ShowNewsDeal">
 	    <image>lazy_people</image>
-	    <text function="default"><![CDATA[<p>Год %1$d.</p> 
-        p ('Торговцы из соседнего королевства предлагают беспроигрышную сделку и обещают прибыль в трёхкратном размере через 5 лет. Для этого лишь нужно вложить зерно в их проект.^Минимально можно вложить 5000 бушелей, максимум - 100000 бушелей.');
-        p ('^Сколько бушелей зерна Вы вложите в дело?');
-        p ('^^На данный момент у Вас:');
-        p ('^Зерна: ', Corn.now, ' бушелей.');
-        p ('^Людей: ', People.now, ' человек.');
-        p ('^Людям для питания нужно: ', People.now*40, ' бушелей зерна.');
-        p ('^Планируемый урожай: ', Corn.harvest, ' бушелей зерна.');
-        p ('^Сколько бушелей?');	        
+	    <text function="room17started"><![CDATA[<p>Год %1$d.</p> 
+      	Торговцы из соседнего королевства предлагают беспроигрышную сделку и обещают прибыль в трёхкратном размере через 5 лет.<br>
+      	Для этого лишь нужно вложить зерно в их проект. Минимально можно вложить 5000 бушелей, максимум - 100000 бушелей.<br>
+        Сколько бушелей зерна Вы вложите в дело?<br>
+        <p>На данный момент у Вас:</p>
+        Зерна: %2$d бушелей.<br>
+        Людей: %3$d человек.<br>
+        Людям для питания нужно: %4$d бушелей зерна.<br>
+        Планируемый урожай: %5$d бушелей зерна.<br>
+        Сколько бушелей?<br>      
 	    ]]></text>
 		<action id="1" buttonAction="nextRoom"><![CDATA[  Далее]]></action>
-		<seekbar id="1" buttonAction="portShipsAction"><![CDATA[Оформить сделку]]></seekbar>	    
+		<seekbar id="1" buttonAction="dealAction"><![CDATA[Оформить сделку]]></seekbar>	    
+	</room>
+	<room id="18" layout="room1" name="Igo">
+	    <image>city_army_approach</image>
+	    <text function="room18started"><![CDATA[<p>Год %1$d.</p> 
+	    [ifdel1]<p>Пришёл час расплаты.</p>
+	    Пришло время платить дань. Противник выдвигает следующие требования. Необходимо отдать ему:<br>
+         - %2$d человек<br>
+         - %3$d акров земли<br>
+         - %4$d бушелей зерна.<br>
+        Что Вы предпримите?[/ifdel1]
+        [ifdel2]<p>Снятие осады!</p>
+        Вам исключительно повезло: королевство, которому Вы платили дань, повержено - на него напали и стёрли с лица земли.<br>
+        Хоть это и не Ваша заслуга, жить теперь станет намного легче.[/ifdel2]
+        [ifdel3]<p>Снятие осады!</p>
+        Враждебное королевство сняло осаду Вашей крепости![/ifdel3]
+	    ]]></text>
+	    <action id="1" buttonAction="payTribute"><![CDATA[  Будем платить дань]]></action>
+	    <action id="2" buttonAction="notPayIgo"><![CDATA[  Дадим отпор]]></action>
+	    <action id="3" buttonAction="nextRoom"><![CDATA[  Далее]]></action>
+	</room>	
+	<room id="19" layout="room1" name="ShowNewInventions">
+	    <image>academy</image>
+	    <text function="room19started"><![CDATA[<p>Год %1$d.</p> 
+	    <p>Результаты научной деятельности.</p>
+	    ]]></text>
+	    <action id="3" buttonAction="nextRoom"><![CDATA[  Далее]]></action>
 	</room>
 	
 </rooms>
